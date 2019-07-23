@@ -36,7 +36,9 @@ class ViewController: UIViewController {
     }
     
     @objc func connect() {
-        
+        let bleListViewController = BLEListViewController()
+        let navigationController = UINavigationController(rootViewController: bleListViewController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     @objc func disconnect() {
