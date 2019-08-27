@@ -50,7 +50,7 @@ final class ViewController: UIViewController {
     func startCheeseAnimation() {
         do {
             cheeseImageView.removeFromSuperview()
-            let gif = try UIImage(gifName: "b.gif")
+            let gif = try UIImage(gifName: "Cheese.gif")
             cheeseImageView = UIImageView(gifImage: gif, loopCount: -1)
             cheeseImageView.frame.size = CGSize(width: 100, height: 100)
             cheeseImageView.center = view.center
