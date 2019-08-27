@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17FB27E52314DC7C0029C3E6 /* test.gif in Resources */ = {isa = PBXBuildFile; fileRef = 17FB27E42314DC7C0029C3E6 /* test.gif */; };
+		17FB27E72314DD740029C3E6 /* b.gif in Resources */ = {isa = PBXBuildFile; fileRef = 17FB27E62314DD740029C3E6 /* b.gif */; };
+		17FB27E92314E1700029C3E6 /* CheeseGraterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */; };
 		8D0E10D723092DB3002B4B1E /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E10D623092DB3002B4B1E /* BLEManager.swift */; };
 		8D164DDC22E464750091047B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DDB22E464750091047B /* AppDelegate.swift */; };
 		8D164DE322E464760091047B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D164DE222E464760091047B /* Assets.xcassets */; };
@@ -17,9 +20,15 @@
 		8D164DF522E49DCB0091047B /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF422E49DCB0091047B /* ArrayExtension.swift */; };
 		8D164DF722E4A2DE0091047B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF622E4A2DE0091047B /* SecondViewController.swift */; };
 		8D164DF922E4A4F80091047B /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF822E4A4F80091047B /* ThirdViewController.swift */; };
+		980E9172C34462D54235B9C5 /* Pods_cheese_grater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB27919916936F5C973F6E6 /* Pods_cheese_grater.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17FB27E42314DC7C0029C3E6 /* test.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = test.gif; sourceTree = "<group>"; };
+		17FB27E62314DD740029C3E6 /* b.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = b.gif; sourceTree = "<group>"; };
+		17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseGraterImageView.swift; sourceTree = "<group>"; };
+		5CB27919916936F5C973F6E6 /* Pods_cheese_grater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cheese_grater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C78148A92D271565C545301 /* Pods-cheese-grater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cheese-grater.debug.xcconfig"; path = "Target Support Files/Pods-cheese-grater/Pods-cheese-grater.debug.xcconfig"; sourceTree = "<group>"; };
 		8D0E10D623092DB3002B4B1E /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		8D164DD822E464750091047B /* cheese-grater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cheese-grater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D164DDB22E464750091047B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +41,7 @@
 		8D164DF422E49DCB0091047B /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		8D164DF622E4A2DE0091047B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		8D164DF822E4A4F80091047B /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
+		BE4288553B67558B0E786EF8 /* Pods-cheese-grater.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cheese-grater.release.xcconfig"; path = "Target Support Files/Pods-cheese-grater/Pods-cheese-grater.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +49,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				980E9172C34462D54235B9C5 /* Pods_cheese_grater.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		005B99382DFE1FF8F9B2BCDA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5CB27919916936F5C973F6E6 /* Pods_cheese_grater.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6DE10B37CA363F050131364E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6C78148A92D271565C545301 /* Pods-cheese-grater.debug.xcconfig */,
+				BE4288553B67558B0E786EF8 /* Pods-cheese-grater.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8D164DCF22E464750091047B = {
 			isa = PBXGroup;
 			children = (
 				8D164DDA22E464750091047B /* cheese-grater */,
 				8D164DD922E464750091047B /* Products */,
+				6DE10B37CA363F050131364E /* Pods */,
+				005B99382DFE1FF8F9B2BCDA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,6 +96,7 @@
 			children = (
 				8D164DF322E49DBB0091047B /* Extension */,
 				8D164DDB22E464750091047B /* AppDelegate.swift */,
+				17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */,
 				8D164DEF22E496B40091047B /* ViewController.swift */,
 				8D164DF622E4A2DE0091047B /* SecondViewController.swift */,
 				8D164DF822E4A4F80091047B /* ThirdViewController.swift */,
@@ -73,6 +104,8 @@
 				8D164DF122E498BD0091047B /* BlueToothInfo.swift */,
 				8D0E10D623092DB3002B4B1E /* BLEManager.swift */,
 				8D164DE222E464760091047B /* Assets.xcassets */,
+				17FB27E62314DD740029C3E6 /* b.gif */,
+				17FB27E42314DC7C0029C3E6 /* test.gif */,
 				8D164DE422E464760091047B /* LaunchScreen.storyboard */,
 				8D164DE722E464760091047B /* Info.plist */,
 			);
@@ -94,9 +127,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D164DEA22E464760091047B /* Build configuration list for PBXNativeTarget "cheese-grater" */;
 			buildPhases = (
+				C9432803C50C6293BA17CD34 /* [CP] Check Pods Manifest.lock */,
 				8D164DD422E464750091047B /* Sources */,
 				8D164DD522E464750091047B /* Frameworks */,
 				8D164DD622E464750091047B /* Resources */,
+				509863EE6B9BBED05FD9CA2F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -146,11 +181,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D164DE622E464760091047B /* LaunchScreen.storyboard in Resources */,
+				17FB27E52314DC7C0029C3E6 /* test.gif in Resources */,
 				8D164DE322E464760091047B /* Assets.xcassets in Resources */,
+				17FB27E72314DD740029C3E6 /* b.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		509863EE6B9BBED05FD9CA2F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cheese-grater/Pods-cheese-grater-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-cheese-grater/Pods-cheese-grater-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-cheese-grater/Pods-cheese-grater-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C9432803C50C6293BA17CD34 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-cheese-grater-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D164DD422E464750091047B /* Sources */ = {
@@ -164,6 +243,7 @@
 				8D164DF922E4A4F80091047B /* ThirdViewController.swift in Sources */,
 				8D164DF022E496B40091047B /* ViewController.swift in Sources */,
 				8D164DEE22E469480091047B /* BLEListViewController.swift in Sources */,
+				17FB27E92314E1700029C3E6 /* CheeseGraterImageView.swift in Sources */,
 				8D164DDC22E464750091047B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +380,7 @@
 		};
 		8D164DEB22E464760091047B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C78148A92D271565C545301 /* Pods-cheese-grater.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -318,6 +399,7 @@
 		};
 		8D164DEC22E464760091047B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE4288553B67558B0E786EF8 /* Pods-cheese-grater.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

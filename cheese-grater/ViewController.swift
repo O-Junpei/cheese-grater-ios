@@ -1,81 +1,114 @@
 import UIKit
 import CoreBluetooth
+import SwiftyGif
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     private var centralManager: CBCentralManager!
     private var targetPeripheral: CBPeripheral!
-    var service: CBService!
+    private var service: CBService!
+    private var cheeseImageView: UIImageView = UIImageView()
 
     var targetCharacteristic: CBCharacteristic!
 
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .lightGray
 
-        let connectButton = UIButton()
-        connectButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
-        connectButton.frame = CGRect(x: 20, y: 100, width: 100, height: 100)
-        connectButton.setTitle("Connect", for: .normal)
-        connectButton.backgroundColor = .red
-        view.addSubview(connectButton)
-        
-        let disconnectButton = UIButton()
-        disconnectButton.addTarget(self, action: #selector(disconnect), for: .touchUpInside)
-        disconnectButton.frame = CGRect(x: 200, y: 100, width: 100, height: 100)
-        disconnectButton.setTitle("Connect", for: .normal)
-        disconnectButton.backgroundColor = .red
-        view.addSubview(disconnectButton)
-        
+        let width = view.bounds.width
+        let height = view.bounds.height
+
         let onButton = UIButton()
         onButton.addTarget(self, action: #selector(on), for: .touchUpInside)
         onButton.frame = CGRect(x: 20, y: 300, width: 100, height: 100)
         onButton.setTitle("On", for: .normal)
         onButton.backgroundColor = .red
         view.addSubview(onButton)
-        
+
         let offButton = UIButton()
         offButton.addTarget(self, action: #selector(off), for: .touchUpInside)
         offButton.frame = CGRect(x: 200, y: 300, width: 100, height: 100)
         offButton.setTitle("Off", for: .normal)
         offButton.backgroundColor = .red
         view.addSubview(offButton)
+
+        let connectButton = UIButton()
+        connectButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
+        connectButton.frame.size = CGSize(width: 80, height: 80)
+        connectButton.center.x = width / 2
+        connectButton.center.y = height - 80 - 40
+        connectButton.setTitle("Connect", for: .normal)
+        connectButton.backgroundColor = .red
+        view.addSubview(connectButton)
+
+        cheeseImageView = UIImageView(image: UIImage(named: "icon"))
+        cheeseImageView.frame.size = CGSize(width: 100, height: 100)
+        cheeseImageView.center = view.center
+        view.addSubview(cheeseImageView)
     }
-    
+
+    func startCheeseAnimation() {
+        do {
+            cheeseImageView.removeFromSuperview()
+            let gif = try UIImage(gifName: "b.gif")
+            cheeseImageView = UIImageView(gifImage: gif, loopCount: -1)
+            cheeseImageView.frame.size = CGSize(width: 100, height: 100)
+            cheeseImageView.center = view.center
+            view.addSubview(cheeseImageView)
+        } catch {
+            print(error)
+        }
+    }
+
+    func stopCheeseAnimation() {
+        cheeseImageView.removeFromSuperview()
+        cheeseImageView = UIImageView(image: UIImage(named: "icon"))
+        cheeseImageView.frame.size = CGSize(width: 100, height: 100)
+        cheeseImageView.center = view.center
+        view.addSubview(cheeseImageView)
+    }
+
+
     @objc func connect() {
 //        let bleListViewController = BLEListViewController()
 //        let navigationController = UINavigationController(rootViewController: bleListViewController)
 //        present(navigationController, animated: true, completion: nil)
-        
-            centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
+
+        centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
     }
     
-    @objc func disconnect() {
+    func sendData(data: String) {
         
     }
-    
+
     @objc func on() {
+        startCheeseAnimation()
         
-        let data = "1".data(using: String.Encoding.utf8, allowLossyConversion:true)
+        guard targetPeripheral != nil else {
+            return
+        }
+        let data = "1".data(using: String.Encoding.utf8, allowLossyConversion: true)
         self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
-        
     }
-    
+
     @objc func off() {
-        
-        let data = "0".data(using: String.Encoding.utf8, allowLossyConversion:true)
+        stopCheeseAnimation()
+        guard targetPeripheral != nil else {
+            return
+        }
+        let data = "0".data(using: String.Encoding.utf8, allowLossyConversion: true)
         self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
     }
 }
 
-extension ViewController: CBCentralManagerDelegate{
-    
+extension ViewController: CBCentralManagerDelegate {
+
     /// Central Managerの状態がかわったら呼び出される。
     ///
     /// - Parameter central: Central manager
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         print("state \(central.state)")
-        
+
         switch central.state {
         case .poweredOff:
             print("Bluetoothの電源がOff")
@@ -91,11 +124,11 @@ extension ViewController: CBCentralManagerDelegate{
             print("不明")
         case .unsupported:
             print("非対応")
-        @unknown default:
+            @unknown default:
             fatalError()
         }
     }
-    
+
     /// PheripheralのScanが成功したら呼び出される。
     ///
     /// - Parameters:
@@ -109,7 +142,7 @@ extension ViewController: CBCentralManagerDelegate{
 //        print("RSSI: \(RSSI)")
 //        print("peripheral.identifier.uuidString: \(peripheral.identifier.uuidString)")
 //        let uuid = UUID(uuid: peripheral.identifier.uuid)
-        
+
 //        var name = ""
 //        let kCBAdvDataLocalName = advertisementData["kCBAdvDataLocalName"] as? String
 //        if let dataLocalName = kCBAdvDataLocalName {
@@ -117,36 +150,36 @@ extension ViewController: CBCentralManagerDelegate{
 //        } else {
 //            name = "no name"
 //        }
-        
-        
+
+
         if peripheral.name?.contains("ESP") ?? false {
             print("ESPきたぞ！！！")
             print("pheripheral.name: \(String(describing: peripheral.name))")
             print("advertisementData:\(advertisementData)")
             print("RSSI: \(RSSI)")
             print("peripheral.identifier.uuidString: \(peripheral.identifier.uuidString)")
-            
+
             targetPeripheral = peripheral
             centralManager.connect(peripheral, options: nil)
         }
-        
-        
-        
+
+
+
 //        let blueToothInfo = BlueToothInfo(uuid: uuid, name: name, peripheral: peripheral)
 //        blueToothInfos.append(blueToothInfo)
 //        blueToothInfos = blueToothInfos.unique
 //
 //        tableView.reloadData()
     }
-    
-    
+
+
     func connectzzzz() {
-        
+
     }
-    
-    
-    
-    
+
+
+
+
     /// Pheripheralに接続した時に呼ばれる。
     ///
     /// - Parameters:
@@ -154,13 +187,13 @@ extension ViewController: CBCentralManagerDelegate{
     ///   - peripheral: peripheral description
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print("connect")
-        
+
         // 遷移するViewを定義する.
 //        let secondViewController: SecondViewController = SecondViewController()
 //        secondViewController.setPeripheral(target: self.targetPeripheral)
 //        secondViewController.setCentralManager(manager: self.centralManager)
 //        secondViewController.searchService()
-        
+
 //        // アニメーションを設定する.
 //        secondViewController.modalTransitionStyle = UIModalTransitionStyle.partialCurl
 //
@@ -169,11 +202,11 @@ extension ViewController: CBCentralManagerDelegate{
 //
         // Scanを停止する.
         centralManager.stopScan()
-        
+
         self.targetPeripheral.delegate = self
         self.targetPeripheral.discoverServices(nil)
     }
-    
+
     /// Pheripheralの接続に失敗した時に呼ばれる。
     ///
     /// - Parameters:
@@ -194,8 +227,8 @@ extension ViewController: CBCentralManagerDelegate{
 
 
 
-extension ViewController: CBPeripheralDelegate{
-    
+extension ViewController: CBPeripheralDelegate {
+
     /// Serviceの検索が終わったら呼び出される
     ///
     /// - Parameters:
@@ -206,15 +239,15 @@ extension ViewController: CBPeripheralDelegate{
             print("Error: \(e.localizedDescription)")
             return
         }
-        
+
         print("didDiscoverServices")
         self.service = peripheral.services?.first
-        
+
         self.targetPeripheral.discoverCharacteristics(nil, for: self.service)
 
     }
-    
-    
+
+
     /// Characteristicの検索が終わったら呼び出される
     ///
     /// - Parameters:
@@ -223,28 +256,27 @@ extension ViewController: CBPeripheralDelegate{
     ///   - error: error description
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         print("didDiscoverCharacteristicsForService")
-        
+
         guard let characteristics = service.characteristics else {
             return
         }
-        
+
         for characteristic in characteristics {
             if isWrite(characteristic: characteristic) {
                 self.targetCharacteristic = characteristic
             }
         }
     }
- 
-    
+
+
     /// Write可能か
     ///
     /// - Parameter characteristic: characteristic description
     /// - Returns: return value description
-    func isWrite(characteristic: CBCharacteristic) -> Bool{
+    func isWrite(characteristic: CBCharacteristic) -> Bool {
         if characteristic.properties.contains(.write) || characteristic.properties.contains(.writeWithoutResponse) {
             return true
         }
         return false
     }
-    
 }
