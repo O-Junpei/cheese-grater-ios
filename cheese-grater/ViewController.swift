@@ -37,8 +37,7 @@ final class ViewController: UIViewController {
         connectButton.frame.size = CGSize(width: 80, height: 80)
         connectButton.center.x = width / 2
         connectButton.center.y = height - 80 - 40
-        connectButton.setTitle("Connect", for: .normal)
-        connectButton.backgroundColor = .red
+        connectButton.setImage(UIImage(named: "off"), for: .normal)
         view.addSubview(connectButton)
 
         cheeseImageView = UIImageView(image: UIImage(named: "icon"))
@@ -267,7 +266,6 @@ extension ViewController: CBPeripheralDelegate {
             }
         }
     }
-
 
     /// Write可能か
     ///
