@@ -22,20 +22,6 @@ final class ViewController: UIViewController {
         let width = view.bounds.width
         let height = view.bounds.height
 
-        let onButton = UIButton()
-        onButton.addTarget(self, action: #selector(on), for: .touchUpInside)
-        onButton.frame = CGRect(x: 20, y: 300, width: 100, height: 100)
-        onButton.setTitle("On", for: .normal)
-        onButton.backgroundColor = .red
-        view.addSubview(onButton)
-
-        let offButton = UIButton()
-        offButton.addTarget(self, action: #selector(off), for: .touchUpInside)
-        offButton.frame = CGRect(x: 200, y: 300, width: 100, height: 100)
-        offButton.setTitle("Off", for: .normal)
-        offButton.backgroundColor = .red
-        view.addSubview(offButton)
-
         bleButton = UIButton()
         bleButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
         bleButton.frame.size = CGSize(width: 80, height: 80)
@@ -50,7 +36,7 @@ final class ViewController: UIViewController {
         graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
         view.addSubview(graterButton)
         
-        cheeseImageView = UIImageView(image: UIImage(named: "icon"))
+        cheeseImageView = UIImageView(image: UIImage(named: "cheese-off"))
         cheeseImageView.frame.size = CGSize(width: 100, height: 100)
         cheeseImageView.center = view.center
         view.addSubview(cheeseImageView)
@@ -59,7 +45,7 @@ final class ViewController: UIViewController {
     func startCheeseAnimation() {
         do {
             cheeseImageView.removeFromSuperview()
-            let gif = try UIImage(gifName: "Cheese.gif")
+            let gif = try UIImage(gifName: "cheese.gif")
             cheeseImageView = UIImageView(gifImage: gif, loopCount: -1)
             cheeseImageView.frame.size = CGSize(width: 100, height: 100)
             cheeseImageView.center = view.center
@@ -71,7 +57,7 @@ final class ViewController: UIViewController {
 
     func stopCheeseAnimation() {
         cheeseImageView.removeFromSuperview()
-        cheeseImageView = UIImageView(image: UIImage(named: "icon"))
+        cheeseImageView = UIImageView(image: UIImage(named: "cheese-off"))
         cheeseImageView.frame.size = CGSize(width: 100, height: 100)
         cheeseImageView.center = view.center
         view.addSubview(cheeseImageView)
@@ -82,34 +68,32 @@ final class ViewController: UIViewController {
     }
     
     func sendData(data: String) {
-        guard targetPeripheral != nil else {
-            return
-        }
         let data = data.data(using: String.Encoding.utf8, allowLossyConversion: true)
         self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
     }
-
-    @objc func on() {
-        startCheeseAnimation()
-        sendData(data: "1")
-    }
-
-    @objc func off() {
-        stopCheeseAnimation()
-        sendData(data: "0")
-    }
     
     @objc func graterButtonTapped() {
+        guard targetPeripheral != nil && targetCharacteristic != nil else {
+            showAlert(title: "Error", message: "削り機が未接続です")
+            return
+        }
+        
         isGraterOn = !isGraterOn
         if isGraterOn {
             graterButton.setBackgroundImage(UIImage(named: "grater-on"), for: .normal)
+            startCheeseAnimation()
+            sendData(data: "1")
         } else {
             graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
+            stopCheeseAnimation()
+            sendData(data: "0")
         }
     }
     
-    func showAlert(title: String, message: String) {
-        
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController( title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Close", style: .default))
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -118,7 +102,7 @@ extension ViewController: CBCentralManagerDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state {
         case .poweredOff:
-            print("Bluetoothの電源がOff")
+            showAlert(title: "Error", message: "Bluetoothの電源がOff")
         case .poweredOn:
             print("Bluetoothの電源はOn")
             // BLEデバイスの検出を開始

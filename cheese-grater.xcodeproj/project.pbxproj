@@ -7,42 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17FB27E52314DC7C0029C3E6 /* test.gif in Resources */ = {isa = PBXBuildFile; fileRef = 17FB27E42314DC7C0029C3E6 /* test.gif */; };
-		17FB27E72314DD740029C3E6 /* b.gif in Resources */ = {isa = PBXBuildFile; fileRef = 17FB27E62314DD740029C3E6 /* b.gif */; };
 		17FB27E92314E1700029C3E6 /* CheeseGraterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */; };
-		8D0E10D723092DB3002B4B1E /* BLEManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0E10D623092DB3002B4B1E /* BLEManager.swift */; };
 		8D164DDC22E464750091047B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DDB22E464750091047B /* AppDelegate.swift */; };
 		8D164DE322E464760091047B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D164DE222E464760091047B /* Assets.xcassets */; };
 		8D164DE622E464760091047B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D164DE422E464760091047B /* LaunchScreen.storyboard */; };
-		8D164DEE22E469480091047B /* BLEListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DED22E469480091047B /* BLEListViewController.swift */; };
 		8D164DF022E496B40091047B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DEF22E496B40091047B /* ViewController.swift */; };
-		8D164DF222E498BD0091047B /* BlueToothInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF122E498BD0091047B /* BlueToothInfo.swift */; };
-		8D164DF522E49DCB0091047B /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF422E49DCB0091047B /* ArrayExtension.swift */; };
-		8D164DF722E4A2DE0091047B /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF622E4A2DE0091047B /* SecondViewController.swift */; };
-		8D164DF922E4A4F80091047B /* ThirdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DF822E4A4F80091047B /* ThirdViewController.swift */; };
-		8D2ABAEA231590C700320D3E /* Cheese.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D2ABAE9231590C700320D3E /* Cheese.gif */; };
+		8D2ABAEA231590C700320D3E /* cheese.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8D2ABAE9231590C700320D3E /* cheese.gif */; };
 		980E9172C34462D54235B9C5 /* Pods_cheese_grater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB27919916936F5C973F6E6 /* Pods_cheese_grater.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		17FB27E42314DC7C0029C3E6 /* test.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = test.gif; sourceTree = "<group>"; };
-		17FB27E62314DD740029C3E6 /* b.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = b.gif; sourceTree = "<group>"; };
 		17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseGraterImageView.swift; sourceTree = "<group>"; };
 		5CB27919916936F5C973F6E6 /* Pods_cheese_grater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cheese_grater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C78148A92D271565C545301 /* Pods-cheese-grater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cheese-grater.debug.xcconfig"; path = "Target Support Files/Pods-cheese-grater/Pods-cheese-grater.debug.xcconfig"; sourceTree = "<group>"; };
-		8D0E10D623092DB3002B4B1E /* BLEManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEManager.swift; sourceTree = "<group>"; };
 		8D164DD822E464750091047B /* cheese-grater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cheese-grater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D164DDB22E464750091047B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D164DE222E464760091047B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D164DE522E464760091047B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D164DE722E464760091047B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8D164DED22E469480091047B /* BLEListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEListViewController.swift; sourceTree = "<group>"; };
 		8D164DEF22E496B40091047B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8D164DF122E498BD0091047B /* BlueToothInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlueToothInfo.swift; sourceTree = "<group>"; };
-		8D164DF422E49DCB0091047B /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
-		8D164DF622E4A2DE0091047B /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		8D164DF822E4A4F80091047B /* ThirdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdViewController.swift; sourceTree = "<group>"; };
-		8D2ABAE9231590C700320D3E /* Cheese.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Cheese.gif; sourceTree = "<group>"; };
+		8D2ABAE9231590C700320D3E /* cheese.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cheese.gif; sourceTree = "<group>"; };
 		BE4288553B67558B0E786EF8 /* Pods-cheese-grater.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cheese-grater.release.xcconfig"; path = "Target Support Files/Pods-cheese-grater/Pods-cheese-grater.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,31 +80,15 @@
 		8D164DDA22E464750091047B /* cheese-grater */ = {
 			isa = PBXGroup;
 			children = (
-				8D164DF322E49DBB0091047B /* Extension */,
 				8D164DDB22E464750091047B /* AppDelegate.swift */,
 				17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */,
 				8D164DEF22E496B40091047B /* ViewController.swift */,
-				8D164DF622E4A2DE0091047B /* SecondViewController.swift */,
-				8D164DF822E4A4F80091047B /* ThirdViewController.swift */,
-				8D164DED22E469480091047B /* BLEListViewController.swift */,
-				8D164DF122E498BD0091047B /* BlueToothInfo.swift */,
-				8D0E10D623092DB3002B4B1E /* BLEManager.swift */,
 				8D164DE222E464760091047B /* Assets.xcassets */,
-				8D2ABAE9231590C700320D3E /* Cheese.gif */,
-				17FB27E62314DD740029C3E6 /* b.gif */,
-				17FB27E42314DC7C0029C3E6 /* test.gif */,
+				8D2ABAE9231590C700320D3E /* cheese.gif */,
 				8D164DE422E464760091047B /* LaunchScreen.storyboard */,
 				8D164DE722E464760091047B /* Info.plist */,
 			);
 			path = "cheese-grater";
-			sourceTree = "<group>";
-		};
-		8D164DF322E49DBB0091047B /* Extension */ = {
-			isa = PBXGroup;
-			children = (
-				8D164DF422E49DCB0091047B /* ArrayExtension.swift */,
-			);
-			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,10 +152,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D164DE622E464760091047B /* LaunchScreen.storyboard in Resources */,
-				17FB27E52314DC7C0029C3E6 /* test.gif in Resources */,
 				8D164DE322E464760091047B /* Assets.xcassets in Resources */,
-				8D2ABAEA231590C700320D3E /* Cheese.gif in Resources */,
-				17FB27E72314DD740029C3E6 /* b.gif in Resources */,
+				8D2ABAEA231590C700320D3E /* cheese.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,13 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D164DF722E4A2DE0091047B /* SecondViewController.swift in Sources */,
-				8D0E10D723092DB3002B4B1E /* BLEManager.swift in Sources */,
-				8D164DF522E49DCB0091047B /* ArrayExtension.swift in Sources */,
-				8D164DF222E498BD0091047B /* BlueToothInfo.swift in Sources */,
-				8D164DF922E4A4F80091047B /* ThirdViewController.swift in Sources */,
 				8D164DF022E496B40091047B /* ViewController.swift in Sources */,
-				8D164DEE22E469480091047B /* BLEListViewController.swift in Sources */,
 				17FB27E92314E1700029C3E6 /* CheeseGraterImageView.swift in Sources */,
 				8D164DDC22E464750091047B /* AppDelegate.swift in Sources */,
 			);
