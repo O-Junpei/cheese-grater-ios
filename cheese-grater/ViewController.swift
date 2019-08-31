@@ -45,6 +45,7 @@ final class ViewController: UIViewController {
         view.addSubview(bleButton)
 
         graterButton = UIButton()
+        graterButton.addTarget(self, action: #selector(graterButtonTapped), for: .touchUpInside)
         graterButton.frame = CGRect(x: 20, y: 100, width: 100, height: 30)
         graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
         view.addSubview(graterButton)
@@ -76,36 +77,39 @@ final class ViewController: UIViewController {
         view.addSubview(cheeseImageView)
     }
 
-
     @objc func connect() {
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
     }
     
     func sendData(data: String) {
-        
+        guard targetPeripheral != nil else {
+            return
+        }
+        let data = data.data(using: String.Encoding.utf8, allowLossyConversion: true)
+        self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
     }
 
     @objc func on() {
         startCheeseAnimation()
-        
-        guard targetPeripheral != nil else {
-            return
-        }
-        let data = "1".data(using: String.Encoding.utf8, allowLossyConversion: true)
-        self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
+        sendData(data: "1")
     }
 
     @objc func off() {
         stopCheeseAnimation()
-        guard targetPeripheral != nil else {
-            return
-        }
-        let data = "0".data(using: String.Encoding.utf8, allowLossyConversion: true)
-        self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
+        sendData(data: "0")
     }
     
     @objc func graterButtonTapped() {
+        isGraterOn = !isGraterOn
+        if isGraterOn {
+            graterButton.setBackgroundImage(UIImage(named: "grater-on"), for: .normal)
+        } else {
+            graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
+        }
+    }
     
+    func showAlert(title: String, message: String) {
+        
     }
 }
 
