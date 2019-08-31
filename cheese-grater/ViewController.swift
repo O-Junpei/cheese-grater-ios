@@ -6,14 +6,18 @@ final class ViewController: UIViewController {
     private var centralManager: CBCentralManager!
     private var targetPeripheral: CBPeripheral!
     private var service: CBService!
+
+    private var targetCharacteristic: CBCharacteristic!
+
     private var cheeseImageView: UIImageView = UIImageView()
-
-    var targetCharacteristic: CBCharacteristic!
-
+    private var graterButton: UIButton!
+    private var bleButton: UIButton!
+    
+    private var isGraterOn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(named: "backgroundBlack")
 
         let width = view.bounds.width
         let height = view.bounds.height
@@ -32,14 +36,19 @@ final class ViewController: UIViewController {
         offButton.backgroundColor = .red
         view.addSubview(offButton)
 
-        let connectButton = UIButton()
-        connectButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
-        connectButton.frame.size = CGSize(width: 80, height: 80)
-        connectButton.center.x = width / 2
-        connectButton.center.y = height - 80 - 40
-        connectButton.setImage(UIImage(named: "off"), for: .normal)
-        view.addSubview(connectButton)
+        bleButton = UIButton()
+        bleButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
+        bleButton.frame.size = CGSize(width: 80, height: 80)
+        bleButton.center.x = width / 2
+        bleButton.center.y = height - 80 - 40
+        bleButton.setImage(UIImage(named: "ble-disconnected"), for: .normal)
+        view.addSubview(bleButton)
 
+        graterButton = UIButton()
+        graterButton.frame = CGRect(x: 20, y: 100, width: 100, height: 30)
+        graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
+        view.addSubview(graterButton)
+        
         cheeseImageView = UIImageView(image: UIImage(named: "icon"))
         cheeseImageView.frame.size = CGSize(width: 100, height: 100)
         cheeseImageView.center = view.center
@@ -69,10 +78,6 @@ final class ViewController: UIViewController {
 
 
     @objc func connect() {
-//        let bleListViewController = BLEListViewController()
-//        let navigationController = UINavigationController(rootViewController: bleListViewController)
-//        present(navigationController, animated: true, completion: nil)
-
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
     }
     
@@ -98,22 +103,21 @@ final class ViewController: UIViewController {
         let data = "0".data(using: String.Encoding.utf8, allowLossyConversion: true)
         self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
     }
+    
+    @objc func graterButtonTapped() {
+    
+    }
 }
 
 extension ViewController: CBCentralManagerDelegate {
-
-    /// Central Managerの状態がかわったら呼び出される。
-    ///
-    /// - Parameter central: Central manager
+    // CentralManager の状態が変わったら呼ばれる
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print("state \(central.state)")
-
         switch central.state {
         case .poweredOff:
             print("Bluetoothの電源がOff")
         case .poweredOn:
             print("Bluetoothの電源はOn")
-            // BLEデバイスの検出を開始.
+            // BLEデバイスの検出を開始
             centralManager.scanForPeripherals(withServices: nil)
         case .resetting:
             print("レスティング状態")
@@ -128,29 +132,8 @@ extension ViewController: CBCentralManagerDelegate {
         }
     }
 
-    /// PheripheralのScanが成功したら呼び出される。
-    ///
-    /// - Parameters:
-    ///   - central: central description
-    ///   - peripheral: peripheral description
-    ///   - advertisementData: advertisementData description
-    ///   - RSSI: RSSI description
+    // デバイスの検出が完了したら呼ばれる
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String: Any], rssi RSSI: NSNumber) {
-//        print("pheripheral.name: \(String(describing: peripheral.name))")
-//        print("advertisementData:\(advertisementData)")
-//        print("RSSI: \(RSSI)")
-//        print("peripheral.identifier.uuidString: \(peripheral.identifier.uuidString)")
-//        let uuid = UUID(uuid: peripheral.identifier.uuid)
-
-//        var name = ""
-//        let kCBAdvDataLocalName = advertisementData["kCBAdvDataLocalName"] as? String
-//        if let dataLocalName = kCBAdvDataLocalName {
-//            name = dataLocalName.description
-//        } else {
-//            name = "no name"
-//        }
-
-
         if peripheral.name?.contains("ESP") ?? false {
             print("ESPきたぞ！！！")
             print("pheripheral.name: \(String(describing: peripheral.name))")
@@ -161,57 +144,16 @@ extension ViewController: CBCentralManagerDelegate {
             targetPeripheral = peripheral
             centralManager.connect(peripheral, options: nil)
         }
-
-
-
-//        let blueToothInfo = BlueToothInfo(uuid: uuid, name: name, peripheral: peripheral)
-//        blueToothInfos.append(blueToothInfo)
-//        blueToothInfos = blueToothInfos.unique
-//
-//        tableView.reloadData()
     }
 
-
-    func connectzzzz() {
-
-    }
-
-
-
-
-    /// Pheripheralに接続した時に呼ばれる。
-    ///
-    /// - Parameters:
-    ///   - central: central description
-    ///   - peripheral: peripheral description
+    // デバイスに接続した時に呼ばれる
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        print("connect")
-
-        // 遷移するViewを定義する.
-//        let secondViewController: SecondViewController = SecondViewController()
-//        secondViewController.setPeripheral(target: self.targetPeripheral)
-//        secondViewController.setCentralManager(manager: self.centralManager)
-//        secondViewController.searchService()
-
-//        // アニメーションを設定する.
-//        secondViewController.modalTransitionStyle = UIModalTransitionStyle.partialCurl
-//
-//        // Viewの移動する.
-//        self.navigationController?.pushViewController(secondViewController, animated: true)
-//
-        // Scanを停止する.
         centralManager.stopScan()
-
-        self.targetPeripheral.delegate = self
-        self.targetPeripheral.discoverServices(nil)
+        targetPeripheral.delegate = self
+        targetPeripheral.discoverServices(nil)
     }
 
-    /// Pheripheralの接続に失敗した時に呼ばれる。
-    ///
-    /// - Parameters:
-    ///   - central: central description
-    ///   - peripheral: peripheral description
-    ///   - error: error description
+    // デバイスの接続に失敗したときに呼ばれる
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         if let e = error {
             print("Error: \(e.localizedDescription)")
@@ -222,37 +164,20 @@ extension ViewController: CBCentralManagerDelegate {
 }
 
 
-
-
-
-
 extension ViewController: CBPeripheralDelegate {
-
-    /// Serviceの検索が終わったら呼び出される
-    ///
-    /// - Parameters:
-    ///   - peripheral: peripheral description
-    ///   - error: error description
+    // Serviceの検索が終わったら呼び出される
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         if let e = error {
             print("Error: \(e.localizedDescription)")
             return
         }
 
-        print("didDiscoverServices")
-        self.service = peripheral.services?.first
-
-        self.targetPeripheral.discoverCharacteristics(nil, for: self.service)
-
+        // 作成したデバイスにサービスは一つしかないので一つ目を取得
+        service = peripheral.services?.first
+        targetPeripheral.discoverCharacteristics(nil, for: self.service)
     }
 
-
-    /// Characteristicの検索が終わったら呼び出される
-    ///
-    /// - Parameters:
-    ///   - peripheral: peripheral description
-    ///   - service: service description
-    ///   - error: error description
+    // Characteristicの検索が終わったら呼び出される
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         print("didDiscoverCharacteristicsForService")
 
@@ -263,14 +188,12 @@ extension ViewController: CBPeripheralDelegate {
         for characteristic in characteristics {
             if isWrite(characteristic: characteristic) {
                 self.targetCharacteristic = characteristic
+                self.bleButton.setBackgroundImage(UIImage(named: "ble-connected"), for: .normal)
             }
         }
     }
 
-    /// Write可能か
-    ///
-    /// - Parameter characteristic: characteristic description
-    /// - Returns: return value description
+    // Write可能か
     func isWrite(characteristic: CBCharacteristic) -> Bool {
         if characteristic.properties.contains(.write) || characteristic.properties.contains(.writeWithoutResponse) {
             return true
