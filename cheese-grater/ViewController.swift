@@ -9,7 +9,7 @@ final class ViewController: UIViewController {
 
     private var targetCharacteristic: CBCharacteristic!
 
-    private var cheeseImageView: UIImageView = UIImageView()
+    private var cheeseGraterView: CheeseGraterView!
     private var graterButton: UIButton!
     private var bleButton: UIButton!
     
@@ -32,35 +32,16 @@ final class ViewController: UIViewController {
 
         graterButton = UIButton()
         graterButton.addTarget(self, action: #selector(graterButtonTapped), for: .touchUpInside)
-        graterButton.frame = CGRect(x: 20, y: 100, width: 100, height: 30)
+        graterButton.frame.size = CGSize(width: 202, height: 69)
+        graterButton.center.x = width / 2
+        graterButton.center.y = 60
         graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
         view.addSubview(graterButton)
         
-        cheeseImageView = UIImageView(image: UIImage(named: "cheese-off"))
-        cheeseImageView.frame.size = CGSize(width: 100, height: 100)
-        cheeseImageView.center = view.center
-        view.addSubview(cheeseImageView)
-    }
-
-    func startCheeseAnimation() {
-        do {
-            cheeseImageView.removeFromSuperview()
-            let gif = try UIImage(gifName: "cheese.gif")
-            cheeseImageView = UIImageView(gifImage: gif, loopCount: -1)
-            cheeseImageView.frame.size = CGSize(width: 100, height: 100)
-            cheeseImageView.center = view.center
-            view.addSubview(cheeseImageView)
-        } catch {
-            print(error)
-        }
-    }
-
-    func stopCheeseAnimation() {
-        cheeseImageView.removeFromSuperview()
-        cheeseImageView = UIImageView(image: UIImage(named: "cheese-off"))
-        cheeseImageView.frame.size = CGSize(width: 100, height: 100)
-        cheeseImageView.center = view.center
-        view.addSubview(cheeseImageView)
+        cheeseGraterView = CheeseGraterView()
+        cheeseGraterView.frame.size = CGSize(width: 142, height: 279)
+        cheeseGraterView.center = view.center
+        view.addSubview(cheeseGraterView)
     }
 
     @objc func connect() {
@@ -73,20 +54,20 @@ final class ViewController: UIViewController {
     }
     
     @objc func graterButtonTapped() {
-        guard targetPeripheral != nil && targetCharacteristic != nil else {
-            showAlert(title: "Error", message: "削り機が未接続です")
-            return
-        }
+//        guard targetPeripheral != nil && targetCharacteristic != nil else {
+//            showAlert(title: "Error", message: "削り機が未接続です")
+//            return
+//        }
         
         isGraterOn = !isGraterOn
         if isGraterOn {
             graterButton.setBackgroundImage(UIImage(named: "grater-on"), for: .normal)
-            startCheeseAnimation()
-            sendData(data: "1")
+            cheeseGraterView.startAnimation()
+//            sendData(data: "1")
         } else {
             graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
-            stopCheeseAnimation()
-            sendData(data: "0")
+            cheeseGraterView.stopAnimation()
+//            sendData(data: "0")
         }
     }
     

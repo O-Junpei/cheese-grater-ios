@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17FB27E92314E1700029C3E6 /* CheeseGraterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */; };
+		17FB27E92314E1700029C3E6 /* CheeseGraterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17FB27E82314E1700029C3E6 /* CheeseGraterView.swift */; };
 		8D164DDC22E464750091047B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D164DDB22E464750091047B /* AppDelegate.swift */; };
 		8D164DE322E464760091047B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D164DE222E464760091047B /* Assets.xcassets */; };
 		8D164DE622E464760091047B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D164DE422E464760091047B /* LaunchScreen.storyboard */; };
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseGraterImageView.swift; sourceTree = "<group>"; };
+		17FB27E82314E1700029C3E6 /* CheeseGraterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheeseGraterView.swift; sourceTree = "<group>"; };
 		5CB27919916936F5C973F6E6 /* Pods_cheese_grater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cheese_grater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C78148A92D271565C545301 /* Pods-cheese-grater.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cheese-grater.debug.xcconfig"; path = "Target Support Files/Pods-cheese-grater/Pods-cheese-grater.debug.xcconfig"; sourceTree = "<group>"; };
 		8D164DD822E464750091047B /* cheese-grater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "cheese-grater.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,8 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				8D164DDB22E464750091047B /* AppDelegate.swift */,
-				17FB27E82314E1700029C3E6 /* CheeseGraterImageView.swift */,
 				8D164DEF22E496B40091047B /* ViewController.swift */,
+				17FB27E82314E1700029C3E6 /* CheeseGraterView.swift */,
 				8D164DE222E464760091047B /* Assets.xcassets */,
 				8D2ABAE9231590C700320D3E /* cheese.gif */,
 				8D164DE422E464760091047B /* LaunchScreen.storyboard */,
@@ -207,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D164DF022E496B40091047B /* ViewController.swift in Sources */,
-				17FB27E92314E1700029C3E6 /* CheeseGraterImageView.swift in Sources */,
+				17FB27E92314E1700029C3E6 /* CheeseGraterView.swift in Sources */,
 				8D164DDC22E464750091047B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
