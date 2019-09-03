@@ -12,67 +12,71 @@ final class ViewController: UIViewController {
     private var cheeseGraterView: CheeseGraterView!
     private var graterButton: UIButton!
     private var bleButton: UIButton!
-    
+
     private var isGraterOn = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "backgroundBlack")
 
+        // TODO: AutoLayout を設定する
         let width = view.bounds.width
         let height = view.bounds.height
+        graterButton = UIButton()
+        graterButton.addTarget(self, action: #selector(graterButtonTapped), for: .touchUpInside)
+        graterButton.frame.size = CGSize(width: 202, height: 69)
+        graterButton.center.x = width / 2
+        graterButton.center.y = 140
+        graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
+        view.addSubview(graterButton)
+
+        cheeseGraterView = CheeseGraterView()
+        cheeseGraterView.frame.size = CGSize(width: 142, height: 279)
+        cheeseGraterView.center = view.center
+        cheeseGraterView.center.x = width / 2
+        cheeseGraterView.center.y = height / 2 + 40
+        view.addSubview(cheeseGraterView)
 
         bleButton = UIButton()
         bleButton.addTarget(self, action: #selector(connect), for: .touchUpInside)
         bleButton.frame.size = CGSize(width: 80, height: 80)
         bleButton.center.x = width / 2
-        bleButton.center.y = height - 80 - 40
+        bleButton.center.y = height - 80
         bleButton.setImage(UIImage(named: "ble-disconnected"), for: .normal)
         view.addSubview(bleButton)
-
-        graterButton = UIButton()
-        graterButton.addTarget(self, action: #selector(graterButtonTapped), for: .touchUpInside)
-        graterButton.frame.size = CGSize(width: 202, height: 69)
-        graterButton.center.x = width / 2
-        graterButton.center.y = 60
-        graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
-        view.addSubview(graterButton)
-        
-        cheeseGraterView = CheeseGraterView()
-        cheeseGraterView.frame.size = CGSize(width: 142, height: 279)
-        cheeseGraterView.center = view.center
-        view.addSubview(cheeseGraterView)
     }
 
     @objc func connect() {
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
     }
-    
+
     func sendData(data: String) {
-        let data = data.data(using: String.Encoding.utf8, allowLossyConversion: true)
-        self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
+        do {
+            let data = data.data(using: String.Encoding.utf8, allowLossyConversion: true)
+            self.targetPeripheral.writeValue(data!, for: targetCharacteristic, type: CBCharacteristicWriteType.withResponse)
+        }
     }
-    
+
     @objc func graterButtonTapped() {
-//        guard targetPeripheral != nil && targetCharacteristic != nil else {
-//            showAlert(title: "Error", message: "削り機が未接続です")
-//            return
-//        }
-        
+        guard targetPeripheral != nil && targetCharacteristic != nil else {
+            showAlert(title: "Error", message: "削り機が未接続です")
+            return
+        }
+
         isGraterOn = !isGraterOn
         if isGraterOn {
             graterButton.setBackgroundImage(UIImage(named: "grater-on"), for: .normal)
             cheeseGraterView.startAnimation()
-//            sendData(data: "1")
+            sendData(data: "1")
         } else {
             graterButton.setBackgroundImage(UIImage(named: "grater-off"), for: .normal)
             cheeseGraterView.stopAnimation()
-//            sendData(data: "0")
+            sendData(data: "0")
         }
     }
-    
+
     private func showAlert(title: String, message: String) {
-        let alert = UIAlertController( title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Close", style: .default))
         present(alert, animated: true, completion: nil)
     }
